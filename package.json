@@ -1,0 +1,40 @@
+{
+  "name": "wordpress-rest-admin",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^1.0.0",
+    "@material-ui/icons": "^1.1.0",
+    "draft-js": "^0.10.5",
+    "draftjs-to-html": "^0.8.3",
+    "html-to-draftjs": "^1.3.1",
+    "md5": "^2.2.1",
+    "moment": "^2.22.0",
+    "querystring": "^0.2.0",
+    "react": "^16.4.1",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-datetime": "^2.14.0",
+    "react-dom": "^16.4.1",
+    "react-draft-wysiwyg": "^1.12.12",
+    "react-infinite-calendar": "^2.3.1",
+    "react-quill": "^1.2.7",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1",
+    "react-select": "^1.2.1",
+    "react-timezone": "^1.0.5",
+    "recompose": "^0.26.0",
+    "redux": "^3.7.2",
+    "redux-form": "^7.3.0",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^0.16.0",
+    "styled-components": "^3.2.6",
+    "universal-cookie": "^2.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

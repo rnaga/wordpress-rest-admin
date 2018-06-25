@@ -1,0 +1,171 @@
+import React from 'react';
+import {connect} from 'react-redux';
+import {compose} from 'recompose';
+import {withRouter} from 'react-router-dom';
+import withHttp from '../../hoc/withHttp';
+import withForm from '../../hoc/withForm';
+import withPost from '../../hoc/contents/withPost';
+import Form from '../../components/Form';
+import httpNormalizeResponseBody from '../../util/httpNormalizeResponseBody';
+
+import PostSettings, {
+    PostSettingsStatus,
+    PostSettingsStatusNoPublish,
+    PostSettingsCategoriesAndTags,
+    PostSettingsFormat,
+    PostSettingsComments,
+    PostSettingsMoreOptions,} from '../../components/posts/PostSettings';
+
+import PostTitle from '../../components/posts/PostTitle';
+import PostContent from '../../components/posts/PostContent';
+import PostToolbar from '../../components/posts/PostToolbar';
+import wpUrl from '../../util/wpUrl';
+import {account} from '../../util/caches';
+
+class Edit extends React.Component {
+
+    componentWillMount(){
+
+        const {
+            http, 
+            post, 
+            history,
+            _basePath,
+            match: {params},
+        } = this.props;
+
+        this.postId = params.query || null;
+        this.handleDelete = this.handleDelete.bind(this);
+
+        http('_posts', {
+            url: wpUrl().path(`posts/${this.postId}`).query({context: 'edit'}).url,
+            method: 'GET',
+            isProtected: true
+        });
+   
+        post.bind(this, {
+            postId: this.postId, 
+            submitAfter: json => {
+                history.replace(`${_basePath}/posts/Edit/${json.id}`);
+            },
+        }); 
+    }
+
+    handleDelete(e){
+        const {history} = this.props;
+        this.post.handleDelete({postId: this.postId, after: history.goBack});
+    }
+
+    render(){
+
+        const {
+          httpGetResponse, 
+          formValues, 
+          doSubmit, 
+          getFormId} = this.props;
+
+        var response = {};
+
+        try{
+            response = httpNormalizeResponseBody(httpGetResponse('_posts'))[0];
+        }catch(err){
+            return null;
+        }
+
+        const edit = Object.assign({}, response, formValues.values);
+
+        return (<div>
+          <Form form={getFormId()} onSubmit={this.post.handleSubmit} > 
+
+            <PostToolbar 
+              onDelete={this.handleDelete}
+              onSubmit={doSubmit} 
+              isCreate={false}/>
+
+            <PostSettings> 
+               {account.cap.publish_posts 
+                 ? <PostSettingsStatus edit={edit} /> 
+                 : <PostSettingsStatusNoPublish edit={edit} />}
+               <PostSettingsCategoriesAndTags edit={edit} />
+               <PostSettingsFormat edit={edit} />
+               {account.cap.moderate_comments && 
+                response.status.match(/^(publish|pending|private)$/) &&
+               <PostSettingsComments edit={edit} />}
+               <PostSettingsMoreOptions edit={edit} />
+            </PostSettings>
+           
+            <PostTitle edit={edit} />
+            <PostContent edit={edit} />
+
+          </Form>
+        </div>);
+    }
+}
+
+Edit = compose(
+    withRouter,
+    withPost({namespace: 'post'}),
+    withHttp(),
+    connect(),
+    withForm({id: '_posts'}),
+)(Edit);
+
+class Create extends React.Component {
+
+    componentWillMount(){
+
+        const {post, history, _basePath,} = this.props;
+
+        post.bind(this, {
+            submitAfter: json => {
+                history.replace(`${_basePath}/posts/Edit/${json.id}`);
+            },
+        });
+
+        this.initEdit = {
+            status: 'draft',
+            format: 'standard',
+            categories: [],
+            tags: []
+        };
+
+    }
+
+    render(){ 
+        const {
+          formValues,
+          doSubmit,
+          getFormId} = this.props;
+
+        const edit = Object.assign({}, this.initEdit, formValues.values);
+
+        return (<div>
+          <Form form={getFormId()} onSubmit={this.post.handleSubmit} >
+
+            <PostToolbar onSubmit={doSubmit} isCreate={true}/>
+
+            <PostSettings>
+               <PostSettingsStatus  edit={edit} />
+               <PostSettingsCategoriesAndTags  edit={edit} />
+               <PostSettingsFormat edit={edit} />
+               <PostSettingsMoreOptions edit={edit} />
+            </PostSettings>
+
+            <PostTitle edit={edit} />
+            <PostContent edit={edit} />
+
+          </Form>
+        </div>);
+    }
+}
+
+Create = compose(
+    withPost({namespace: 'post'}),
+    withHttp(),
+    connect(),
+    withForm({id: '_create_post'}),
+)(Create);
+
+export {Create, Edit};
+
+
