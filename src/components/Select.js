@@ -18,10 +18,6 @@ class Select extends React.Component{
                label, 
                options, 
                clearable = false, 
-               searchable = false, 
-               id, 
-               name, 
-               disabled = false,
                defaultValue,
               } = this.props;
 
@@ -31,17 +27,11 @@ class Select extends React.Component{
         <div style={style}>
         <label style={{fontSize: '0.775rem', color: 'rgba(0, 0, 0, 0.54)'}}>{label}</label>
         <ReactSelect
-          id={id}
-          name={name} 
-          onBlurResetsInput={false}
-          onSelectResetsInput={true}
           options={options}
           simpleValue
           clearable={clearable}
-          disabled={disabled}
           value={defaultValue}
           onChange={this.handleChange.bind(this)}
-          searchable={searchable}
         /></div>)
     }
 }

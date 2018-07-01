@@ -18,16 +18,27 @@ import Login from './components/Login';
 import ClickAway from './containers/ClickAway';
 import Width from './containers/Width';
 import Errorbars from './components/Errorbars';
+import contents, {defaultContent} from './contents';
+
+import loginLogo from './WordpressLogo.svg';
+import headerLogo from './WordpressLogo.png';
 
 class App extends React.Component {
 
     getChildContext() {
+
         return {
             // CSS styles
             classes: this.props.classes,
             store: this.props.store,
             location: this.props.location,
             history: this.props.history,
+            contents: this.props.contents || contents,
+            defaultContent: this.props.defaultContent || defaultContent,
+            staticFiles: {
+                loginLogo: this.props.loginLogo || loginLogo,
+                headerLogo: this.props.headerLogo || headerLogo,
+            }
         };
     }
 
@@ -82,6 +93,9 @@ App.childContextTypes = {
     store: PropTypes.object,
     location: PropTypes.object,
     history: PropTypes.object,
+    contents: PropTypes.object,
+    defaultContent: PropTypes.object,
+    staticFiles: PropTypes.object,
 };
 
 App.propTypes = {

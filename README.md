@@ -19,9 +19,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Profile
 - Settings
 
-## Installation
-### Backend
-First make sure that the followings are installed on your WordPress
+## Usage
+
+### Backend - what needs to be done first
+Make sure you have WP REST API and JWP plugin installed in your wordpress
 #### WP REST API
 - https://v2.wp-api.org/
 - Note that WordPress (4.7 or later) has this installed by default
@@ -30,14 +31,41 @@ First make sure that the followings are installed on your WordPress
 - [Installation instructions](https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/)
 - [Tutorial](https://www.youtube.com/watch?v=Mp7T7x1oxDk)
 
-### git and npm
-
+### git clone and npm start
+- Run these commands just to see how it works
 ```
 git clone https://github.com/rnaga/wordpress-rest-admin.git .
 npm install
 npm start
 ```
-- Open http://localhost:3000 with your browser
+- Visit http://localhost:3000
+
+### Use as a React Component
+
+- Create a new React project with [Create React App](https://github.com/facebook/create-react-app)
+- Import package
+```
+cd /path/to/your/project
+npm install
+npm i wordpress-rest-admin
+```
+- and render it
+```
+import WPAdmin from 'wordpress-rest-admin/WPAdmin';
+import contents from 'wordpress-rest-admin/contents';
+import loginLogo from './WordpressLogo.svg';
+import headerLogo from './WordpressLogo.png';
+
+...
+
+<WPAdmin
+  loginLogo={loginLogo}
+  headerLogo={headerLogo}
+  defaultContent={defaultContent}
+  contents={contents}
+/>
+```
+See example [here](https://github.com/rnaga/wordpress-rest-admin/tree/master/example)
 
 ## Supported Browsers
 

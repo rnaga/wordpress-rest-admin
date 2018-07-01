@@ -17,7 +17,7 @@ import httpNormalizeResponseBody from '../../util/httpNormalizeResponseBody';
 import wpUrl, {wpUrlPosts} from '../../util/wpUrl';
 import striptags from '../../util/striptags';
 import adminUrl from '../../util/adminUrl';
-import {account} from '../../util/caches';
+import caches from '../../util/caches';
 
 class Activity extends React.Component{
 
@@ -83,6 +83,7 @@ class Activity extends React.Component{
     render(){
 
         const {cssStyles, width, style = {}} = this.props;
+        const account = caches('account');
 
         const recentlyPublished = [
           {label: 'Posts', list: this.posts, linkTo: adminUrl('posts', 'Edit').url, access: account.cap.edit_published_posts},

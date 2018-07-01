@@ -1,9 +1,10 @@
-import {wpBaseUrl, account} from './caches';
+import caches from './caches';
 import queryString from 'querystring';
 
 class wpUrl{
 
     constructor({path, query}){
+        const wpBaseUrl = caches('wpBaseUrl');
         this._baseUrl = wpBaseUrl.get();
         this.path(path);
         this.query(query);
@@ -39,6 +40,7 @@ class wpUrl{
 
     queryFunc(func){
 
+        const account = caches('account');
         this._query = Object.assign({}, this._query, func({account}));
 
         this.url = this.toString();
@@ -58,6 +60,7 @@ class wpUrl{
 const wpUrlEdit = ({path, query}) => {
 
     const _wpUrl = new wpUrl({path, query});
+    //const account = caches('account');
 
     _wpUrl.queryFunc( ({account}) => {
         if(account.role !== 'administrator')
@@ -71,6 +74,7 @@ const wpUrlEdit = ({path, query}) => {
 
 const wpUrlPosts = query => {
 
+    //const account = caches('account');
     const _wpUrl = new wpUrl({path: 'posts', query});
 
     _wpUrl.queryFunc( ({account}) => {

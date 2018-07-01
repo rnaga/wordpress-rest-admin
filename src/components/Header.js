@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import withStyles from '../hoc/withStyles';
 import withSidebar from '../hoc/withSidebar';
 import withClickAway from '../hoc/withClickAway';
@@ -9,12 +10,11 @@ import Typography from '@material-ui/core/Typography';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import logo from '../WordpressLogo.png';
 import Button from '@material-ui/core/Button';
 import getIcon from '../util/getIcon';
 import {compose} from 'recompose';
 import UserAccount from './UserAccount';
-import {site} from '../util/caches';
+import caches from '../util/caches';
 
 class Header extends React.Component {
 
@@ -38,10 +38,11 @@ class Header extends React.Component {
     render(){
 
         const {cssStyles, handleSidebarToggle, getSharedState, setSharedState, setClickAway} = this.props;
- 
+        const site = caches('site'); 
         const Person = getIcon({iconName: 'Person'});
     
         const {open = false} = getSharedState();
+        const {headerLogo} = this.context.staticFiles;
 
         return (<div>
             <AppBar position="absolute" classes={{colorPrimary: cssStyles.appBar}} >
@@ -52,7 +53,7 @@ class Header extends React.Component {
                   </IconButton>
                 </Hidden> 
                 <Typography variant="title" color="inherit" noWrap>
-                  <img src={logo} style={{width: '50px', height: '50px'}} alt='wp-logo'/>
+                  <img src={headerLogo} style={{width: '50px', height: '50px'}} alt='wp-logo'/>
                 </Typography>
                 <Typography variant="title" color="inherit" noWrap>
                   <span style={{padding: '10px', color: '#DCDCDC'}}>{site.get()['name']}</span>
@@ -70,7 +71,7 @@ class Header extends React.Component {
                     onClick={e => setSharedState({open: !open})} 
                     ref={ref => setClickAway({ref, i: 0})}
                   >
-                    <Person style={{padding: '10px', position: 'absolute'}}/>
+                    <Person style={{fill: 'black', padding: '10px', position: 'absolute'}}/>
                   </Button>
     
                   <div style={{float: 'right', position: 'relative'}}> 
@@ -86,6 +87,10 @@ class Header extends React.Component {
         </div>);
     }
 }
+
+Header.contextTypes = {
+    staticFiles: PropTypes.object,
+};
 
 export default compose(
     withClickAway({key: '_header'}),

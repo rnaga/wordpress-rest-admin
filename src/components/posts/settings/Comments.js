@@ -7,7 +7,7 @@ import withHttp from '../../../hoc/withHttp';
 import httpNormalizeResponseBody from '../../../util/httpNormalizeResponseBody';
 import httpGetHeaders from '../../../util/httpGetHeaders';
 import Comment from '../../../components/Comment';
-import {account} from '../../../util/caches';
+import caches from '../../../util/caches';
 import wpUrl from '../../../util/wpUrl';
 
 class Comments extends React.Component {
@@ -47,6 +47,7 @@ class Comments extends React.Component {
     handleClick(){
 
         const {edit} = this.props;
+        const account = caches('account');
         const _account = account.get();
 
         const value = {

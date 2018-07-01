@@ -1,6 +1,5 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
-import {defaultAuthorizer, account} from '../util/caches';
+import caches from '../util/caches';
 
 const withAuth = (options = {}) => WrappedComponent => {
 
@@ -15,13 +14,14 @@ const withAuth = (options = {}) => WrappedComponent => {
         }
 
         logOut(){
+            const defaultAuthorizer = caches('defaultAuthorizer'); 
             const authorizer = defaultAuthorizer.get();
             authorizer.options.logOut();
             window.location.reload();
         }
 
         async logIn({username, password, remember, }){
-       
+            const defaultAuthorizer = caches('defaultAuthorizer'); 
             const authorizer = defaultAuthorizer.get();
 
             try{
@@ -33,6 +33,7 @@ const withAuth = (options = {}) => WrappedComponent => {
         }
 
         isAuthed(){
+            const defaultAuthorizer = caches('defaultAuthorizer'); 
             const authorizer = defaultAuthorizer.get();
             return authorizer.options.isAuthed();
         }
@@ -42,6 +43,7 @@ const withAuth = (options = {}) => WrappedComponent => {
             if(!Array.isArray(roles))
                 return false;
 
+            const account = caches('account'); 
             return 0 <= roles.indexOf(account.role);
         }
 
@@ -49,6 +51,8 @@ const withAuth = (options = {}) => WrappedComponent => {
 
             if(!Array.isArray(caps))
                 return false;
+
+            const account = caches('account'); 
 
             for(let i = 0; i < caps.length; i++){
                 let cap = account.cap[caps[i]];

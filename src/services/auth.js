@@ -1,6 +1,6 @@
 import Cookies from 'universal-cookie';
 import newHttpError from '../util/newHttpError';
-import {wpBaseUrl} from '../util/caches';
+import caches from '../util/caches';
 
 // Use cookie to store JWT's login token
 const cookies = new Cookies();
@@ -30,7 +30,8 @@ const auth = {
     },
 
     logIn: async ({username, password, remember}) => {
- 
+
+        const wpBaseUrl = caches('wpBaseUrl'); 
         const url = `${wpBaseUrl.get()}/wp-json/jwt-auth/v1/token`;
   
         const results = await fetch(url, {

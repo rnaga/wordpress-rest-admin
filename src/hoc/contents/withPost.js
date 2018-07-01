@@ -2,11 +2,10 @@
 //import PropTypes from 'prop-types';
 import {compose} from 'recompose';
 import {withRouter} from 'react-router-dom'
-//import {connect} from 'react-redux';
 import Contents from './contents';
 import withActions from '../withActions';
 import wpUrl from '../../util/wpUrl';
-import {account} from '../../util/caches';
+import caches from '../../util/caches';
 import httpNormalizeResponseBody from '../../util/httpNormalizeResponseBody';
 
 const withPost = ({namespace}) => WrappedComponent => {
@@ -31,7 +30,9 @@ const withPost = ({namespace}) => WrappedComponent => {
         }
 
         canEdit(item){
-        
+
+            const account = caches('account');
+
             switch(item.status){
                 case 'publish':
                     return account.cap.edit_published_posts;
@@ -43,6 +44,8 @@ const withPost = ({namespace}) => WrappedComponent => {
         }
 
         canDelete(item){
+
+            const account = caches('account');
 
             switch(item.status){
                 case 'publish':

@@ -5,7 +5,7 @@ import withHttp from '../../../hoc/withHttp';
 import httpNormalizeResponseBody from '../../../util/httpNormalizeResponseBody';
 import AsyncSelectField from '../../forms/AsyncSelectField';
 import wpUrl from '../../../util/wpUrl';
-import {account} from '../../../util/caches';
+import caches from '../../../util/caches';
 
 class Tags extends React.Component {
 
@@ -61,6 +61,8 @@ class Tags extends React.Component {
     }
 
     render(){
+
+        const account = caches('account');
 
         return (<div>
 

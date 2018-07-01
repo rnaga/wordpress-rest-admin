@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {withRouter, Switch, Route} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
@@ -8,7 +9,7 @@ import withSidebar from '../hoc/withSidebar';
 import withWidth from '../hoc/withWidth';
 import ContentToolbar from './ContentToolbar';
 import {actions} from '../actions';
-import contents, {defaultContent} from '../contents';
+//import contents, {defaultContent} from '../contents';
 
 // Execute contents defined in './contents'
 const Loader = content => compose(withRouter, connect(), withContentToolbar, withStyles,)(
@@ -91,6 +92,7 @@ class Content extends React.Component {
 
     componentWillMount(){
         const {cssStyles} = this.props;
+        const {contents, defaultContent} = this.context;
 
         // Define the element for content here 
         // to prevent re-rendering from window resize, nav expansion/collapsing
@@ -98,7 +100,8 @@ class Content extends React.Component {
               <div className={cssStyles.toolbar} />
               <Switch>
                 <Route exact path="/" component={Loader(defaultContent)} />
-                {contents && contents.map( (content, i) => {
+                {contents && Object.entries(contents).map( (contentKey, i) => { 
+                    const [, content] = contentKey;
                     return (<Route key={i} path={content.pagePath} component={Loader(content)}/>);
                 })}
               </Switch>
@@ -125,6 +128,11 @@ class Content extends React.Component {
 
     }
 }
+
+Content.contextTypes = {
+    contents: PropTypes.object,
+    defaultContent: PropTypes.object,
+};
 
 export default compose(
     withRouter,

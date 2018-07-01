@@ -5,7 +5,7 @@ import withWidth from '../../hoc/withWidth';
 import AtAGlance from '../../components/dashboard/AtAGlance';
 import QuickDraft from '../../components/dashboard/QuickDraft';
 import Activity from '../../components/dashboard/Activity';
-import {account} from '../../util/caches';
+import caches from '../../util/caches';
 
 class Index extends React.Component{
 
@@ -33,6 +33,7 @@ class Index extends React.Component{
     }
 
     render(){
+        const account = caches('account');
         const {width} = this.props;
         return width === 'xs' || !account.cap.edit_posts ? this.widthXs() : this.widthOthers();
     }

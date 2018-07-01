@@ -1,7 +1,7 @@
 import {all, put, call, takeLatest, takeEvery} from 'redux-saga/effects';
 import {types, actions} from './actions';
 import wpUrl from './util/wpUrl';
-import {account, site, wpBaseUrl} from './util/caches';
+import caches from './util/caches';
 
 function *http({httpClient, url, method, options, isProtected, authorizer, onSuccess, onFail, ...rest}){
 
@@ -112,6 +112,10 @@ function *http({httpClient, url, method, options, isProtected, authorizer, onSuc
 function *init({httpClient, authorizer}){
 
     var authResult = {};
+
+    const account = caches('account');    
+    const site = caches('site');
+    const wpBaseUrl = caches('wpBaseUrl');
 
     try{
         const {authorize, ...authOptions} = authorizer.options;

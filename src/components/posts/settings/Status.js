@@ -1,14 +1,12 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
 import {compose} from 'recompose';
 import {Field} from 'redux-form';
-//import {change as formChange} from 'redux-form';
 import moment from 'moment';
 import withStyles from '../../../hoc/withStyles';
 import DatetimeField from '../../forms/DatetimeField';
 import SwitchField from '../../forms/SwitchField';
 import SelectField from '../../forms/SelectField';
-import {site} from '../../../util/caches';
+import caches from '../../../util/caches';
 
 const publishStatus = [
     { label: 'Publish', value: 'publish'},
@@ -51,6 +49,7 @@ class Status extends React.Component {
     isFuture(){
 
         const {date} = this.state._status;
+        const site = caches('site');
         const gmtOffset = site.get().gmt_offset * 60;
 
         const dateCurrent = moment(moment().utcOffset(gmtOffset).format('YYYY-MM-DDTHH:mm:ss'));
@@ -74,6 +73,7 @@ class Status extends React.Component {
         var status = newStatus.status || _status.status;
 
         const newDate = moment(date);
+        const site = caches('site');
         const gmtOffset = site.get().gmt_offset * 60;
         const dateCurrent = moment(moment().utcOffset(gmtOffset).format('YYYY-MM-DDTHH:mm:ss'));
 

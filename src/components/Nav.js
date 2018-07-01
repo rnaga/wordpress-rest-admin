@@ -16,7 +16,6 @@ import withCurrentContent from '../hoc/withCurrentContent';
 import withAuth from '../hoc/withAuth';
 import withWidth from '../hoc/withWidth';
 import {compose} from 'recompose';
-import contents from '../contents';
 
 class ListItemButton extends React.Component{ 
 
@@ -134,7 +133,8 @@ class ListItems extends React.Component {
     }
 
     render(){
-
+  
+        const {contents} = this.context;
         const {history, 
                width, 
                handleSidebarToggle,
@@ -151,7 +151,9 @@ class ListItems extends React.Component {
         return (
           <div>
             <div style={{height: width === 'xs' ? '20px' : '90px'}} />
-            {contents && contents.length > 0 && contents.map( (content, i) => {
+            {contents && Object.entries(contents).length > 0 && Object.entries(contents).map( (contentKey, i) => {
+
+             const [key, content] = contentKey;
 
              const {subMenus, label, icon} = content;
 
@@ -167,7 +169,7 @@ class ListItems extends React.Component {
 
              return (
                <ListItemButton
-                 key={i}
+                 key={key}
                  id={i}
                  icon={icon} 
                  label={label}
@@ -233,6 +235,10 @@ class ListItems extends React.Component {
           </div>);
     }
 }
+
+ListItems.contextTypes = {
+    contents: PropTypes.object,
+};
 
 class Nav extends React.Component {
 

@@ -8,7 +8,7 @@ import settings from './settings';
 import comments from './comments';
 import dashboard from './dashboard';
 
-export default [dashboard, posts, pages, categories, tags, comments, users, profile, settings];
+export default {dashboard, posts, pages, categories, tags, comments, users, profile, settings};
 
 const defaultContent = dashboard;
 

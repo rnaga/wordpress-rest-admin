@@ -7,30 +7,33 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 
-const FullscreenLoading = props => {
+class FullscreenLoading extends React.Component{
 
-    const {cssStyles, getSharedState} = props;
+    render(){
 
-    const {open = false} = getSharedState();
-
-    if(!this.key || open)
-        this.key = Math.random();
+        const {cssStyles, getSharedState} = this.props;
     
-    return (
-      <Dialog
-        key={this.key}
-        open={open}
-        style={{width: '200px', marginLeft: '40%', backgroundColor: 'transparent'}}
-        classes={{paper: cssStyles.fullscreenDialogPaper}}
-      >
-        <DialogContent style={{backgroundColor: 'transparent'}}>
-          <CircularProgress 
-            size={50}  
-            style={{display: 'inline-block', backgroundColor: 'transparent'}} 
-            classes={{colorPrimary: cssStyles.fullscreenColorPrimary}}
-          />
-        </DialogContent>
-      </Dialog>);
+        const {open = false} = getSharedState();
+    
+        if(!this.key || open)
+            this.key = Math.random();
+        
+        return (
+          <Dialog
+            key={this.key}
+            open={open}
+            style={{width: '200px', marginLeft: '40%', backgroundColor: 'transparent'}}
+            classes={{paper: cssStyles.fullscreenDialogPaper}}
+          >
+            <DialogContent style={{backgroundColor: 'transparent'}}>
+              <CircularProgress 
+                size={50}  
+                style={{display: 'inline-block', backgroundColor: 'transparent'}} 
+                classes={{colorPrimary: cssStyles.fullscreenColorPrimary}}
+              />
+            </DialogContent>
+          </Dialog>);
+    }
 }
 
 //const mapStateToProps = (state, ownProps) => ({

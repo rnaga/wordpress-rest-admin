@@ -19,7 +19,7 @@ class MoreOptions extends React.Component {
                            ? edit.excerpt
                            : (edit.excerpt ? edit.excerpt.raw : '');
 
-        return (<div>
+        return (<div style={{width: '100%'}}>
           <Field 
             component={TextField} 
             id="slug" 

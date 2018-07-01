@@ -1,32 +1,32 @@
+const cacheName = '___wp_rest_admin_cache___';
 
-
-var cache = {}
+window[cacheName] = window[cacheName] || {}
 
 const create = (name, options) => {
-    cache[name] = {
+    window[cacheName][name] = {
         data: {},
         options,
     }
 }
 
 const createIfNotExists = (name, options) => {
-    if(typeof cache[name] === 'undefined')
+    if(typeof window[cacheName][name] === 'undefined')
         create(name, options);
 }
 
 const clear = (name) => {
-    cache[name].data = {};
+    window[cacheName][name].data = {};
 }
 
 const check = (name, keys) => {
 
     var keysNotIncluded = [];
 
-    if(typeof cache[name] === 'undefined')
+    if(typeof window[cacheName][name] === 'undefined')
         return keys;
 
     keys.forEach( (v,i) => {
-        if(!cache[name].data[v])
+        if(!window[cacheName][name].data[v])
             keysNotIncluded.push(v);
     });
 
@@ -38,8 +38,8 @@ const get = (name, keys) => {
     var r = [];
 
     keys.forEach( (v,i) => {
-        if(cache[name].data[v])
-            r.push(cache[name].data[v]);
+        if(window[cacheName][name].data[v])
+            r.push(window[cacheName][name].data[v]);
     });
 
     return r;
@@ -50,19 +50,19 @@ const getOne = (name, key) => {
     return Array.isArray(values) ? values[0] : null;
 }
 
-const getAll = (name) => cache[name].data;
+const getAll = (name) => window[cacheName][name].data;
 
 const getOptions = (name) => {
-    return cache[name].options;
+    return window[cacheName][name].options;
 }
 
 const updateOptions = (name, options) => {
-    cache[name].options = options;
+    window[cacheName][name].options = options;
 }
 
 const update = (name, key, value) => {
     createIfNotExists(name);
-    cache[name].data[key] = value;
+    window[cacheName][name].data[key] = value;
 }
 
 class Cache {

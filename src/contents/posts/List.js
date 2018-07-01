@@ -13,7 +13,7 @@ import withTableList from '../../hoc/contents/withTableList';
 import wpUrl, {wpUrlPosts} from '../../util/wpUrl';
 import adminUrl from '../../util/adminUrl';
 import IconActionButton from '../../components/IconActionButton';
-import {account} from '../../util/caches';
+import caches from '../../util/caches';
 
 class List extends React.Component{
 
@@ -74,6 +74,7 @@ class List extends React.Component{
 
         const {http} = this.props;
         const {parseHttpResponse, resetItems, updateItems} = this.list;
+        const account = caches('account');
 
         resetItems();
 

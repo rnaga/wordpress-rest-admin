@@ -20,7 +20,7 @@ import PostTitle from '../../components/posts/PostTitle';
 import PostContent from '../../components/posts/PostContent';
 import PostToolbar from '../../components/posts/PostToolbar';
 import wpUrl from '../../util/wpUrl';
-import {account} from '../../util/caches';
+import caches from '../../util/caches';
 
 class Edit extends React.Component {
 
@@ -57,6 +57,8 @@ class Edit extends React.Component {
     }
 
     render(){
+
+        const account = caches('account');
 
         const {
           httpGetResponse, 

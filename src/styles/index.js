@@ -13,16 +13,16 @@ const styles = theme => {
     },
   
     dashboardCardheaderTitle: {
-      fontSize: '1.0rem',
-      fontWeight: 550,
+      fontSize: '1.0rem !important',
+      fontWeight: 'bold !important',
     },
   
     dashboardPostsCardheaderTitle: {
-      fontSize: '0.8rem',
+      fontSize: '0.8rem !important',
     },
   
     dashboardCardheaderRoot: {
-      borderBottom: '1px solid #eee',
+      borderBottom: '1px solid #eee !important',
     },
   
     dashboardPostsCardheaderRoot: {
@@ -30,19 +30,19 @@ const styles = theme => {
     },
   
     dashboardCardContent: {
-      fontSize: '0.8rem',
+      fontSize: '0.8rem !important',
     },
   
     dashboardListItemText: {
-      fontSize: '0.8rem',
+      fontSize: '0.8rem !important',
     },
   
     dashboardActivityListItemTextPrimary: {
-      fontSize: '0.8rem',
+      fontSize: '0.8rem !important',
     },
   
     dashboardActivityListItemTextSecondary: {
-      fontSize: '0.75rem',
+      fontSize: '0.75rem !important',
     },
   
     dashboardQuickDraftTextFieldRoot: {
@@ -160,7 +160,7 @@ const styles = theme => {
     },
   
     drawerPaperPost: {
-      top: `${headerMinHeight*2}px`,
+      top: `${headerMinHeight*2}px !important`,
       overflowX: 'hidden',
       minWidth: 350,
     },
@@ -261,7 +261,7 @@ const styles = theme => {
     },
   
     textFieldDefaultInput: {
-      padding: '5px 6px',
+      padding: '5px 6px !important',
       width: 'calc(100% - 24px)',
       transition: theme.transitions.create(['border-color', 'box-shadow']),
       '&:focus': {
@@ -321,11 +321,11 @@ const styles = theme => {
     },
   
     expandCollapseEntered: {
-      overflow: 'unset',
+      overflow: 'unset !important',
     },
     
     expandPanelSummaryContent: {
-      display: 'block'
+      display: 'block !important'
     },
 }}
 

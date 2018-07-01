@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {compose} from 'recompose';
-//import PropTypes from 'prop-types';
 import {Field} from 'redux-form';
 import withStyles from '../hoc/withStyles';
 import withForm from '../hoc/withForm';
@@ -9,12 +9,12 @@ import withAdmin from '../hoc/withAdmin';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import Typography from '@material-ui/core/Typography';
-import logo from '../WordpressLogo.svg';
+//import logo from '../WordpressLogo.svg';
 import Form from './Form';
 import TextField from './forms/TextField'
 import ActionButton from './ActionButton';
 import CheckboxField from './forms/CheckboxField';
-import {wpBaseUrl} from '../util/caches';
+import caches from '../util/caches';
 
 class Login extends React.Component {
 
@@ -29,6 +29,7 @@ class Login extends React.Component {
 
         const {logIn, initAdmin} = this.props;
         const _self = this;
+        const wpBaseUrl = caches('wpBaseUrl');
 
         wpBaseUrl.update(values.siteurl);
  
@@ -51,12 +52,13 @@ class Login extends React.Component {
     render(){
 
         const {errMsg} = this.state;
+        const wpBaseUrl = caches('wpBaseUrl');
+        const {loginLogo} = this.context.staticFiles;
 
         return (
           <Dialog
             fullScreen
             open={true}
-    //        classes={{paper: cssStyles.fullscreenDialogPaper}}
           >
             <DialogContent style={{backgroundColor: '#f1f1f1'}}>
 
@@ -69,7 +71,7 @@ class Login extends React.Component {
               }}>
 
                 <Typography variant="title" color="inherit" noWrap>
-                  <img src={logo} style={{width: '80px', height: '80px', paddingBottom: 20}} alt='wp-logo'/>
+                  <img src={loginLogo} style={{width: '80px', height: '80px', paddingBottom: 20}} alt='wp-logo'/>
                 </Typography>
               </div>
 
@@ -150,9 +152,9 @@ class Login extends React.Component {
     }
 }
 
-//const mapStateToProps = (state, ownProps) => ({
-//    loading: state.loading,
-//})
+Login.contextTypes = {
+    staticFiles: PropTypes.object,
+};
 
 export default compose(
    withStyles,

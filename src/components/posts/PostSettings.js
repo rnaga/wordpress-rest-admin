@@ -144,8 +144,10 @@ class PostSettings extends React.Component {
               onClose={closePostSettings}
               open={isPostSettingsOpen()}>
 
-            <div style={{paddingRight: 5, paddingTop: 5, backgroundColor: '#eeeeee'}}>
-              <Typography style={{float: 'left', padding: '20px 0 0 20px', fontWeight: 600, fontSize: '1rem'}}>Post Settings</Typography>
+            <div style={{paddingRight: 5, paddingTop: 5, paddingBottom: 10, backgroundColor: '#eeeeee'}}>
+              <Typography style={{float: 'left', padding: '20px 0 0 20px', fontWeight: 600, fontSize: '1rem'}}>
+                  Post Settings
+              </Typography>
               <span style={{float: 'right'}}>
                 <IconActionButton type='clear' onClick={closePostSettings} />
               </span>

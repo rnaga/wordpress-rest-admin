@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import {actions} from '../actions';
-import {defaultAuthorizer, defaultHttpClient} from '../util/caches';
+import caches from '../util/caches';
 
 const withHttp = (options = {}) => (WrappedComponent) => {
 
@@ -33,6 +33,9 @@ const withHttp = (options = {}) => (WrappedComponent) => {
         }
 
         http(id, options){
+
+            const defaultAuthorizer = caches('defaultAuthorizer');
+            const defaultHttpClient = caches('defaultHttpClient');
 
             var {authorizer = defaultAuthorizer.get(),
                  httpClient = defaultHttpClient.get(),
@@ -89,6 +92,7 @@ const withHttp = (options = {}) => (WrappedComponent) => {
         render(){
 
             const {responses} = this.props;
+            const defaultHttpClient = caches('defaultHttpClient');
 
             return (<WrappedComponent 
                      {...this.props}

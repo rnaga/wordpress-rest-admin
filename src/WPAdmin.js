@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux'
 import { createLogger } from 'redux-logger'
 import { Provider } from 'react-redux';
@@ -9,7 +8,6 @@ import rootSaga from './saga';
 import rootReducer from './reducers';
 import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 import jsonClient from './services/jsonClient';
 import auth from './services/auth';
 import createAuthorizer from './util/createAuthorizer';
@@ -37,11 +35,14 @@ defaultAuthorizer.update(authorizer);
 // Default HTTP Client
 defaultHttpClient.update(jsonClient);
 
-ReactDOM.render(
-<Provider store={store}>
-  <HashRouter>
-    <App store={store} />
-  </HashRouter>
-</Provider>
-,document.getElementById('root'));
-registerServiceWorker();
+export default props => {
+    return (<Provider store={store}>
+      <HashRouter>
+        <App 
+          store={store} 
+          {...props} 
+        />
+      </HashRouter>
+    </Provider>);
+}
+

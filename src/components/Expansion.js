@@ -21,7 +21,7 @@ class Expansion extends React.Component {
               <Typography >{title}</Typography>
               {subTitle}
             </ExpansionPanelSummary>
-            <ExpansionPanelDetails style={{display: 'block'}}>
+            <ExpansionPanelDetails style={{display: 'block !important'}}>
               {children}
             </ExpansionPanelDetails>
           </ExpansionPanel>);

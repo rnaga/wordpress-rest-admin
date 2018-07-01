@@ -16,7 +16,7 @@ import CardContent from '@material-ui/core/CardContent';
 import withAuth from '../hoc/withAuth';
 import withSharedState, {ssNamespaces} from '../hoc/withSharedState';
 import withStyles from '../hoc/withStyles';
-import {account} from '../util/caches';
+import caches from '../util/caches';
 import adminUrl from '../util/adminUrl';
 
 class UserAccount extends React.Component {
@@ -29,7 +29,7 @@ class UserAccount extends React.Component {
           return null;
 
       const {cssStyles, logOut, history, setSharedState} = this.props;
-
+      const account = caches('account');
       const user = account.get();
  
       const Edit = getIcon({iconName: 'Edit'});

@@ -4,10 +4,9 @@ import {compose} from 'recompose';
 import {connect} from 'react-redux';
 import {actions} from '../actions';
 import withHttp from '../hoc/withHttp';
-import {account} from '../util/caches';
 import httpNormalizeResponseBody from '../util/httpNormalizeResponseBody';
 import wpUrl from '../util/wpUrl';
-import {defaultAuthorizer, defaultHttpClient} from '../util/caches';
+import caches from '../util/caches';
 
 const withAdmin = WrappedComponent => {
 
@@ -17,6 +16,9 @@ const withAdmin = WrappedComponent => {
 
             const {dispatch} = this.props;
 
+            const defaultAuthorizer = caches('defaultAuthorizer');
+            const defaultHttpClient = caches('defaultHttpClient');
+    
             const httpClient = options.httpClient || defaultHttpClient.get();
             const authorizer = options.authorizer || defaultAuthorizer.get();
 
@@ -40,11 +42,13 @@ const withAdmin = WrappedComponent => {
 
         async updateMyAccount(){
             const value = await this.httpUserAccount();
+            const account = caches('account');
             account.update(value);
             return value;
         }
 
         getMyAccount(){
+            const account = caches('account');
             return account.get();
         }
 

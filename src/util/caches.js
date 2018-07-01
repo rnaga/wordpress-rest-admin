@@ -1,53 +1,64 @@
 import Cache from './cache';
 import Cookies from 'universal-cookie';
 
-const accountCache = new Cache('account');
+const cachesName = '___wp_rest_admin_caches___';
 
-const account = {
+window[cachesName] = window[cachesName] || {};
+
+const _ = window[cachesName];
+
+_.accountCache = _.accountCache || new Cache('account');
+
+_.account = {
     update: value => {
-        account.id = value['id'];
-        account.role = value['roles'][0];
-        account.cap = value['capabilities']
-        accountCache.update('value', value)
+        _.account.id = value['id'];
+        _.account.role = value['roles'][0];
+        _.account.cap = value['capabilities']
+        _.accountCache.update('value', value)
     },
 
-    get: () => accountCache.getOne('value')
+    get: () => _.accountCache.getOne('value')
 }
 
-const siteCache = new Cache('site');
+_.siteCache = _.siteCache || new Cache('site');
 
-const site = {
-    update: value => siteCache.update('value', value),
-    get: () => siteCache.getOne('value'),
+_.site = {
+    update: value => _.siteCache.update('value', value),
+    get: () => _.siteCache.getOne('value'),
 }
 
-const cookies = new Cookies();
+_.cookies = _.cookies || new Cookies();
 
-const wpBaseUrl = {
-    update: value => cookies.set('siteurl', value, {path: '/', maxAge: 604800}),
-    get: () => cookies.get('siteurl'),
+_.wpBaseUrl = {
+    update: value => _.cookies.set('siteurl', value, {path: '/', maxAge: 604800}),
+    get: () => _.cookies.get('siteurl'),
 }
 
-const defaultAuthorizerCache = new Cache('authorizer');
+_.defaultAuthorizerCache = _.defaultAuthorizerCache || new Cache('authorizer');
 
-const defaultAuthorizer = {
-    update: value => defaultAuthorizerCache.update('value', value),
-    get: () => defaultAuthorizerCache.getOne('value'),
+_.defaultAuthorizer = {
+    update: value => _.defaultAuthorizerCache.update('value', value),
+    get: () => _.defaultAuthorizerCache.getOne('value'),
 }
 
-const defaultHttpClientCache = new Cache('httpClient');
+_.defaultHttpClientCache = _.defaultHttpClientCache || new Cache('httpClient');
 
-const defaultHttpClient = {
-    update: value => defaultHttpClientCache.update('value', value),
-    get: () => defaultHttpClientCache.getOne('value'),
+_.defaultHttpClient = {
+    update: value => _.defaultHttpClientCache.update('value', value),
+    get: () => _.defaultHttpClientCache.getOne('value'),
 }
 
+/*
+const account = window[cachesName].account;
+const site = window[cachesName].site;
+const wpBaseUrl = window[cachesName].wpBaseUrl;
+const defaultAuthorizer = window[cachesName].defaultAuthorizer;
+const defaultHttpClient = window[cachesName].defaultHttpClient;
+*/
+export default namespace => {
+    return window[cachesName][namespace];
+}
 
-export {
-    account, 
-    site,
-    wpBaseUrl,
-    defaultAuthorizer,
-    defaultHttpClient,
-};
+//export {cachesName, account, site, wpBaseUrl, defaultAuthorizer, defaultHttpClient};
+
 

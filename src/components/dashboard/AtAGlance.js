@@ -13,7 +13,7 @@ import withStyles from '../../hoc/withStyles';
 import httpGetHeaders from '../../util/httpGetHeaders';
 import wpUrl from '../../util/wpUrl';
 import adminUrl from '../../util/adminUrl';
-import {account} from '../../util/caches';
+import caches from '../../util/caches';
 
 class AtAGlance extends React.Component{
 
@@ -65,7 +65,7 @@ class AtAGlance extends React.Component{
     render(){
 
         const {cssStyles, style = {}} = this.props;
-
+        const account = caches('account');
         const Folder = getIcon({iconName: 'Folder'});
         const LibraryBooks = getIcon({iconName: 'LibraryBooks'});
         const Message = getIcon({iconName: 'Message'});
