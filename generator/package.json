@@ -1,0 +1,11 @@
+{
+  "name": "generator-wordpress-rest-admin",
+  "version": "0.1.0",
+  "description": "Code generator for wordpress-rest-admin",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "yeoman-generator": "^3.0.0"
+  }
+}

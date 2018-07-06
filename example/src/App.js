@@ -4,6 +4,9 @@ import contents from 'wordpress-rest-admin/contents';
 import loginLogo from './WordpressLogo.svg';
 import headerLogo from './WordpressLogo.png';
 
+// A new content created by generator
+import mypage from './contents/mypage';
+
 class App extends Component {
 
     render() {
@@ -19,7 +22,7 @@ class App extends Component {
           loginLogo={loginLogo}
           headerLogo={headerLogo}
           defaultContent={defaultContent}
-          contents={{dashboard, posts, pages, categories, tags, comments, users, profile, settings}} 
+          contents={{dashboard, posts, pages, categories, tags, comments, users, profile, settings, mypage}} 
         />);
     }
 }

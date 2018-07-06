@@ -3,6 +3,7 @@
 
 const path = require("path");
 const glob = require("glob");
+const nodeExternals = require('webpack-node-externals');
 
 process.env.NODE_ENV='production';
 const library = 'wordpress-rest-admin';
@@ -44,6 +45,8 @@ module.exports = {
         library: [library, "[name]"],
         libraryTarget: 'commonjs2'
     },
+
+    externals: [nodeExternals()],
 
     devtool: "source-map",
 
