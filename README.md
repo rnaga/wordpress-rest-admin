@@ -18,6 +18,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Users
 - Profile
 - Settings
+- [Create your own page](#how-to-create-your-own-page)
 
 ## Usage
 
@@ -65,6 +66,46 @@ import headerLogo from './WordpressLogo.png';
   contents={contents}
 />
 ```
+See example [here](https://github.com/rnaga/wordpress-rest-admin/tree/master/example)
+
+## How to create your own page
+- Install [yeoman](http://yeoman.io/learning/)
+```
+npm install yo -g
+```
+- clone this repo, and install generator (generator-wordpress-rest-admin)
+
+```
+git clone https://github.com/rnaga/wordpress-rest-admin.git . 
+cd ./generator
+npm link
+```
+There is "generator" directory in this repo. 
+Go under the directory, then run "npm link" as above
+
+- Go to "src" directory under your React project, and run yo command
+```
+yo wordpress-rest-admin:contents [mypage]
+```
+It creates new files under "contents" directory (see blow)
+
+![Alt Screenshot](https://user-images.githubusercontent.com/20383976/42358623-595bb37c-8092-11e8-9d00-6c7e35afd908.png)
+
+- Import and pass your new page to WPAdmin component
+```
+import mypage from './contents/mypage';
+
+....
+
+<WPAdmin contents={{mypage}} />
+```
+
+- Start your project, and visit http://localhost:3000
+
+![Alt Screenshot](https://user-images.githubusercontent.com/20383976/42358846-97e87246-8093-11e8-8984-88c66545352c.png)
+
+- Update List.js, Edit.js and Create.js as needed to change output
+
 See example [here](https://github.com/rnaga/wordpress-rest-admin/tree/master/example)
 
 ## Supported Browsers

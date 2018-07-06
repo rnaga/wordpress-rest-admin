@@ -1,6 +1,6 @@
 {
   "name": "wordpress-rest-admin",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": true,
   "engines": {
     "node": ">=8.9.0",
