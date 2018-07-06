@@ -14,7 +14,7 @@ import loginLogo from './WordpressLogo.svg';
 import headerLogo from './WordpressLogo.png';
 
 // A new content created by generator
-import custom from './contents/custom';
+import mypage from './contents/mypage';
 
 class App extends Component {
 
@@ -31,7 +31,7 @@ class App extends Component {
           loginLogo={loginLogo}
           headerLogo={headerLogo}
           defaultContent={defaultContent}
-          contents={{dashboard, posts, pages, categories, tags, comments, users, profile, settings, custom}} 
+          contents={{dashboard, posts, pages, categories, tags, comments, users, profile, settings, mypage}} 
         />);
     }
 }
