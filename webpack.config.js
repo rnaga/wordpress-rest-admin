@@ -10,8 +10,11 @@ const library = 'wordpress-rest-admin';
 
 const getEntries = entryPath => {
 
+    if(0 >= entryPath.length)
+        return null;
+
     // e.g. containers/**/*.js
-    return glob.sync('./src/' + entryPath)
+    const entries = glob.sync('./src/' + entryPath.shift())
     .reduce( (entries, entry) => {
     
         const key = entry.replace('./src/', '').replace('.js', '');
@@ -23,6 +26,9 @@ const getEntries = entryPath => {
         return entries
               
     }, {})
+
+    return Object.assign(entries, getEntries(entryPath));
+
 }
 
 const getNpmConfig = (varname, _default) => {
@@ -30,12 +36,14 @@ const getNpmConfig = (varname, _default) => {
 }
 
 // glob path to set the entry point
-const entryPath  = getNpmConfig('entryPath', null);
+const entryPath = getNpmConfig('entryPath', null).split(",");
 
 // Path for output files
 const outputPath = getNpmConfig('outputPath', path.resolve(__dirname, "dist"));
 
-const entries = !entryPath ? {WPAdmin: "./src/WPAdmin.js"} : getEntries(entryPath); 
+const entries = !entryPath 
+              ? {WPAdmin: "./src/WPAdmin.js"} 
+              : getEntries(entryPath); 
 
 module.exports = {
     entry: entries,

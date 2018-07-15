@@ -18,7 +18,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Users
 - Profile
 - Settings
-- [Create your own page](#how-to-create-your-own-page)
+- [Code generator to create your own page](#how-to-create-your-own-page)
 
 ## Usage
 
@@ -69,7 +69,8 @@ import headerLogo from './WordpressLogo.png';
 See example [here](https://github.com/rnaga/wordpress-rest-admin/tree/master/example)
 
 ## How to create your own page
-- Install [yeoman](http://yeoman.io/learning/)
+
+- First, install [yeoman](http://yeoman.io/learning/)
 ```
 npm install yo -g
 ```
@@ -84,10 +85,11 @@ There is "generator" directory in this repo.
 Go under the directory, then run "npm link" as above
 
 - Go to "src" directory under your React project, and run yo command
+(Choose your icon from [here](https://material.io/tools/icons/?style=baseline))
 ```
 yo wordpress-rest-admin:contents [mypage]
 ```
-It creates new files under "contents" directory (see blow)
+It creates new files(components) under "contents" directory (see blow)
 
 ![Alt Screenshot](https://user-images.githubusercontent.com/20383976/42358623-595bb37c-8092-11e8-9d00-6c7e35afd908.png)
 
@@ -104,7 +106,17 @@ import mypage from './contents/mypage';
 
 ![Alt Screenshot](https://user-images.githubusercontent.com/20383976/42358846-97e87246-8093-11e8-8984-88c66545352c.png)
 
-- Update List.js, Edit.js and Create.js as needed to change output
+- Update components(List.js, Edit.js and Create.js) as needed to change output
+
+### How to import existing pages into your project 
+This is useful in case you want to modify existing pages
+```
+yo wordpress-rest-admin --copy-from=[content]
+```
+where "content" is one of the following.
+```
+categories  comments  dashboard  pages  posts  profile  settings  tags  users
+```
 
 See example [here](https://github.com/rnaga/wordpress-rest-admin/tree/master/example)
 

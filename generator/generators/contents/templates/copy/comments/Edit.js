@@ -1,17 +1,17 @@
 import React from 'react';
 import {compose} from 'recompose';
 import {withRouter} from "react-router-dom";
-import withActions from '../../hoc/withActions';
-import withHttp from '../../hoc/withHttp';
+import withActions from 'wordpress-rest-admin/hoc/withActions';
+import withHttp from 'wordpress-rest-admin/hoc/withHttp';
 import {Field} from 'redux-form';
-import Form from '../../components/Form';
-import TextField from '../../components/forms/TextField';
-import SelectField from '../../components/forms/SelectField';
-import CommentField from '../../components/forms/CommentField';
-import {SaveButton} from '../../components/ActionButton';
-import withComment from '../../hoc/contents/withComment';
-import wpUrl from '../../util/wpUrl';
-import httpNormalizeResponseBody from '../../util/httpNormalizeResponseBody';
+import Form from 'wordpress-rest-admin/components/Form';
+import TextField from 'wordpress-rest-admin/components/forms/TextField';
+import SelectField from 'wordpress-rest-admin/components/forms/SelectField';
+import CommentField from 'wordpress-rest-admin/components/forms/CommentField';
+import {SaveButton} from 'wordpress-rest-admin/components/ActionButton';
+import withComment from 'wordpress-rest-admin/hoc/contents/withComment';
+import wpUrl from 'wordpress-rest-admin/util/wpUrl';
+import httpNormalizeResponseBody from 'wordpress-rest-admin/util/httpNormalizeResponseBody';
 
 const textFields = edit => ([
     {id: 'author_name', label: 'Author\'s Name', defaultValue: edit.author_name},

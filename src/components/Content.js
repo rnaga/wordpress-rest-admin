@@ -9,7 +9,6 @@ import withSidebar from '../hoc/withSidebar';
 import withWidth from '../hoc/withWidth';
 import ContentToolbar from './ContentToolbar';
 import {actions} from '../actions';
-//import contents, {defaultContent} from '../contents';
 
 // Execute contents defined in './contents'
 const Loader = content => compose(withRouter, connect(), withContentToolbar, withStyles,)(

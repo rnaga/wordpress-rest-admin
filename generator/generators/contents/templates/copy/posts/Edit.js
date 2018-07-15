@@ -2,23 +2,25 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import {withRouter} from 'react-router-dom';
-import withHttp from '../../hoc/withHttp';
-import withForm from '../../hoc/withForm';
-import withPage from '../../hoc/contents/withPage';
-import Form from '../../components/Form';
-import httpNormalizeResponseBody from '../../util/httpNormalizeResponseBody';
+import withHttp from 'wordpress-rest-admin/hoc/withHttp';
+import withForm from 'wordpress-rest-admin/hoc/withForm';
+import withPost from 'wordpress-rest-admin/hoc/contents/withPost';
+import Form from 'wordpress-rest-admin/components/Form';
+import httpNormalizeResponseBody from 'wordpress-rest-admin/util/httpNormalizeResponseBody';
 
 import PostSettings, {
     PostSettingsStatus,
     PostSettingsStatusNoPublish,
+    PostSettingsCategoriesAndTags,
+    PostSettingsFormat,
     PostSettingsComments,
-    PostSettingsMoreOptions,} from '../../components/posts/PostSettings';
+    PostSettingsMoreOptions,} from 'wordpress-rest-admin/components/posts/PostSettings';
 
-import PostTitle from '../../components/posts/PostTitle';
-import PostContent from '../../components/posts/PostContent';
-import PostToolbar from '../../components/posts/PostToolbar';
-import wpUrl from '../../util/wpUrl';
-import caches from '../../util/caches';
+import PostTitle from 'wordpress-rest-admin/components/posts/PostTitle';
+import PostContent from 'wordpress-rest-admin/components/posts/PostContent';
+import PostToolbar from 'wordpress-rest-admin/components/posts/PostToolbar';
+import wpUrl from 'wordpress-rest-admin/util/wpUrl';
+import caches from 'wordpress-rest-admin/util/caches';
 
 class Edit extends React.Component {
 
@@ -26,35 +28,37 @@ class Edit extends React.Component {
 
         const {
             http, 
-            page, 
+            post, 
             history,
             _basePath,
             match: {params},
         } = this.props;
 
-        this.pageId = params.query || null;
+        this.postId = params.query || null;
         this.handleDelete = this.handleDelete.bind(this);
 
-        http('_pages', {
-            url: wpUrl().path(`pages/${this.pageId}`).query({context: 'edit'}).url,
+        http('_posts', {
+            url: wpUrl().path(`posts/${this.postId}`).query({context: 'edit'}).url,
             method: 'GET',
             isProtected: true
         });
    
-        page.bind(this, {
-            pageId: this.pageId, 
+        post.bind(this, {
+            postId: this.postId, 
             submitAfter: json => {
-                history.replace(`${_basePath}/pages/Edit/${json.id}`);
+                history.replace(`${_basePath}/posts/Edit/${json.id}`);
             },
         }); 
     }
 
     handleDelete(e){
         const {history} = this.props;
-        this.page.handleDelete({pageId: this.pageId, after: history.goBack});
+        this.post.handleDelete({postId: this.postId, after: history.goBack});
     }
 
     render(){
+
+        const account = caches('account');
 
         const {
           httpGetResponse, 
@@ -63,10 +67,9 @@ class Edit extends React.Component {
           getFormId} = this.props;
 
         var response = {};
-        const account = caches('account');
 
         try{
-            response = httpNormalizeResponseBody(httpGetResponse('_pages'))[0];
+            response = httpNormalizeResponseBody(httpGetResponse('_posts'))[0];
         }catch(err){
             return null;
         }
@@ -74,7 +77,7 @@ class Edit extends React.Component {
         const edit = Object.assign({}, response, formValues.values);
 
         return (<div>
-          <Form form={getFormId()} onSubmit={this.page.handleSubmit} > 
+          <Form form={getFormId()} onSubmit={this.post.handleSubmit} > 
 
             <PostToolbar 
               onDelete={this.handleDelete}
@@ -82,9 +85,11 @@ class Edit extends React.Component {
               isCreate={false}/>
 
             <PostSettings> 
-               {account.cap.publish_pages 
+               {account.cap.publish_posts 
                  ? <PostSettingsStatus edit={edit} /> 
                  : <PostSettingsStatusNoPublish edit={edit} />}
+               <PostSettingsCategoriesAndTags edit={edit} />
+               <PostSettingsFormat edit={edit} />
                {account.cap.moderate_comments && 
                 response.status.match(/^(publish|pending|private)$/) &&
                <PostSettingsComments edit={edit} />}
@@ -101,10 +106,9 @@ class Edit extends React.Component {
 
 export default compose(
     withRouter,
-    withPage({namespace: 'page'}),
+    withPost({namespace: 'post'}),
     withHttp(),
     connect(),
-    withForm({id: '_pages'}),
+    withForm({id: '_posts'}),
 )(Edit);
-
 

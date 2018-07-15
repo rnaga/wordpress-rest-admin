@@ -1,17 +1,17 @@
 import React from 'react';
 import {compose} from 'recompose';
 import {withRouter} from "react-router-dom";
-import withActions from '../../hoc/withActions';
-import withHttp from '../../hoc/withHttp';
-import httpNormalizeResponseBody from '../../util/httpNormalizeResponseBody';
+import withActions from 'wordpress-rest-admin/hoc/withActions';
+import withHttp from 'wordpress-rest-admin/hoc/withHttp';
+import httpNormalizeResponseBody from 'wordpress-rest-admin/util/httpNormalizeResponseBody';
 import {Field} from 'redux-form';
-import Form from '../../components/Form';
-import TextField from '../../components/forms/TextField';
-import SelectField from '../../components/forms/SelectField';
-import {SaveButton, DeleteButton} from '../../components/ActionButton';
-import withUser from '../../hoc/contents/withUser';
-import withContentToolbar from '../../hoc/withContentToolbar';
-import wpUrl from '../../util/wpUrl';
+import Form from 'wordpress-rest-admin/components/Form';
+import TextField from 'wordpress-rest-admin/components/forms/TextField';
+import SelectField from 'wordpress-rest-admin/components/forms/SelectField';
+import {SaveButton, DeleteButton} from 'wordpress-rest-admin/components/ActionButton';
+import withUser from 'wordpress-rest-admin/hoc/contents/withUser';
+import withContentToolbar from 'wordpress-rest-admin/hoc/withContentToolbar';
+import wpUrl from 'wordpress-rest-admin/util/wpUrl';
 
 const textFields = edit => ([
     {id: 'first_name', label: 'First Name', defaultValue: edit.first_name},

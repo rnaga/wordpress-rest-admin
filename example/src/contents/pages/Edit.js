@@ -2,23 +2,23 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import {withRouter} from 'react-router-dom';
-import withHttp from '../../hoc/withHttp';
-import withForm from '../../hoc/withForm';
-import withPage from '../../hoc/contents/withPage';
-import Form from '../../components/Form';
-import httpNormalizeResponseBody from '../../util/httpNormalizeResponseBody';
+import withHttp from 'wordpress-rest-admin/hoc/withHttp';
+import withForm from 'wordpress-rest-admin/hoc/withForm';
+import withPage from 'wordpress-rest-admin/hoc/contents/withPage';
+import Form from 'wordpress-rest-admin/components/Form';
+import httpNormalizeResponseBody from 'wordpress-rest-admin/util/httpNormalizeResponseBody';
 
 import PostSettings, {
     PostSettingsStatus,
     PostSettingsStatusNoPublish,
     PostSettingsComments,
-    PostSettingsMoreOptions,} from '../../components/posts/PostSettings';
+    PostSettingsMoreOptions,} from 'wordpress-rest-admin/components/posts/PostSettings';
 
-import PostTitle from '../../components/posts/PostTitle';
-import PostContent from '../../components/posts/PostContent';
-import PostToolbar from '../../components/posts/PostToolbar';
-import wpUrl from '../../util/wpUrl';
-import caches from '../../util/caches';
+import PostTitle from 'wordpress-rest-admin/components/posts/PostTitle';
+import PostContent from 'wordpress-rest-admin/components/posts/PostContent';
+import PostToolbar from 'wordpress-rest-admin/components/posts/PostToolbar';
+import wpUrl from 'wordpress-rest-admin/util/wpUrl';
+import caches from 'wordpress-rest-admin/util/caches';
 
 class Edit extends React.Component {
 

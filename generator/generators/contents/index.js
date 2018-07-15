@@ -5,10 +5,36 @@ const generator = class extends Generator{
 
     constructor(args, opts){
         super(args, opts);
-        this.argument('name', {type: String, required: true});
+
+        this.option('copy-from');
+
+        if(!this.options['copyFrom'])
+            this.argument('name', {type: String, required: true});
     }
 
-    prompts(){
+    install(){
+
+        if(this.options['copyFrom']){
+            this._copy();
+            return;
+        }
+
+        // Create empty content
+        this._prompts();
+    }
+
+    _copy(){
+
+        const copyFrom = this.options['copyFrom'];
+        const {sourcePath = './'} = this.options;
+
+        this.fs.copy(
+            this.templatePath(`copy/${copyFrom}`),
+            this.destinationPath(`${sourcePath}contents/${copyFrom}`)
+        );
+    }
+
+    _prompts(){
 
         const _self = this;
 

@@ -1,4 +1,4 @@
-import createContent from '../../util/createContent';
+import createContent from 'wordpress-rest-admin/util/createContent';
 
 import List from './List';
 import Edit from './Edit';

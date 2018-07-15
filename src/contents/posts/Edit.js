@@ -104,70 +104,11 @@ class Edit extends React.Component {
     }
 }
 
-Edit = compose(
+export default compose(
     withRouter,
     withPost({namespace: 'post'}),
     withHttp(),
     connect(),
     withForm({id: '_posts'}),
 )(Edit);
-
-class Create extends React.Component {
-
-    componentWillMount(){
-
-        const {post, history, _basePath,} = this.props;
-
-        post.bind(this, {
-            submitAfter: json => {
-                history.replace(`${_basePath}/posts/Edit/${json.id}`);
-            },
-        });
-
-        this.initEdit = {
-            status: 'draft',
-            format: 'standard',
-            categories: [],
-            tags: []
-        };
-
-    }
-
-    render(){ 
-        const {
-          formValues,
-          doSubmit,
-          getFormId} = this.props;
-
-        const edit = Object.assign({}, this.initEdit, formValues.values);
-
-        return (<div>
-          <Form form={getFormId()} onSubmit={this.post.handleSubmit} >
-
-            <PostToolbar onSubmit={doSubmit} isCreate={true}/>
-
-            <PostSettings>
-               <PostSettingsStatus  edit={edit} />
-               <PostSettingsCategoriesAndTags  edit={edit} />
-               <PostSettingsFormat edit={edit} />
-               <PostSettingsMoreOptions edit={edit} />
-            </PostSettings>
-
-            <PostTitle edit={edit} />
-            <PostContent edit={edit} />
-
-          </Form>
-        </div>);
-    }
-}
-
-Create = compose(
-    withPost({namespace: 'post'}),
-    withHttp(),
-    connect(),
-    withForm({id: '_create_post'}),
-)(Create);
-
-export {Create, Edit};
-
 

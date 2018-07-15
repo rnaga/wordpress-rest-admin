@@ -66,8 +66,9 @@ const withComment = ({namespace}) => WrappedComponent => {
 
         handleSubmit(value, after = null){
 
-            const {startAction, endAction, http, commentId = ''} = this.props;
- 
+            const {startAction, endAction, http} = this.props;
+            const {commentId} = this[namespace]._options;
+
             startAction();
     
             http('_submit', {
