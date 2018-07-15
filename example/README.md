@@ -14,14 +14,17 @@ import loginLogo from './WordpressLogo.svg';
 import headerLogo from './WordpressLogo.png';
 
 // A new content created by generator
-import custom from './contents/custom';
+import mypage from './contents/mypage';
+
+// A copied content created by 'yo wordpress-rest-admin:contents --copy-from=pages'
+import pages from './contents/pages';
 
 class App extends Component {
 
     render() {
 
         // Retrieve contents 
-        const {dashboard, posts, pages, categories, tags, comments, users, profile, settings} = contents;
+        const {dashboard, posts, categories, tags, comments, users, profile, settings} = contents;
 
         // Set default content
         const defaultContent = dashboard;
@@ -31,7 +34,7 @@ class App extends Component {
           loginLogo={loginLogo}
           headerLogo={headerLogo}
           defaultContent={defaultContent}
-          contents={{dashboard, posts, pages, categories, tags, comments, users, profile, settings, custom}} 
+          contents={{dashboard, posts, pages, categories, tags, comments, users, profile, settings, mypage}} 
         />);
     }
 }
