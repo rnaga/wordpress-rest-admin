@@ -116,7 +116,7 @@ yo wordpress-rest-admin:contents --copy-from=[content]
 ```
 where "content" is one of the following.
 ```
-categories  comments  dashboard  pages  posts  profile  settings  tags  users
+categories  comments  dashboard  pages  posts  media profile  settings  tags  users
 ```
 
 See example [here](https://github.com/rnaga/wordpress-rest-admin/tree/master/example)
