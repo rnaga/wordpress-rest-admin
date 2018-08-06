@@ -3,7 +3,7 @@
 A frontend for admin area of WordPress, using [WP REST API](https://v2.wp-api.org/) and [React](https://reactjs.org/).
 It works with Self-Hosted WordPress.
 
-[![Alt Screenshot](https://user-images.githubusercontent.com/20383976/41827852-a5e8504c-77e6-11e8-8667-3eb80f910fa2.png)](https://vimeo.com/276794147)
+[![Alt Screenshot](https://user-images.githubusercontent.com/20383976/43695314-d837f7b0-98ec-11e8-9850-f12d5ec4ae0b.png)](https://vimeo.com/283360988)
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
@@ -13,6 +13,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Dashboard
 - Posts(List, Edit, Add New, Trash)
 - Pages(List, Edit, Add New, Trash)
+- Media Upload(Images)
 - Categories and Tags
 - Comments
 - Users
