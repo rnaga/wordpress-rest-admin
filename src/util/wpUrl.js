@@ -87,6 +87,26 @@ const wpUrlPosts = query => {
     return _wpUrl
 }
 
+const wpUrlMedia = query => {
+
+    //const account = caches('account');
+    const _wpUrl = new wpUrl({path: 'media', query});
+
+    _wpUrl.queryFunc( ({account}) => {
+
+        // Only images are allowed for now
+        const query = {media_type: 'image'};
+
+        if(account.role !== 'administrator')
+            return {...query, author: account.id};
+
+        return query;
+    })
+
+    return _wpUrl
+}
+
+
 const wpUrlMe = query => wpUrlEdit({path: 'me', query});
 
 export default (args = {}) => {
@@ -94,6 +114,6 @@ export default (args = {}) => {
     return new wpUrl({query, path});
 }
 
-export {wpUrlPosts, wpUrlMe};
+export {wpUrlPosts, wpUrlMe, wpUrlMedia};
  
 

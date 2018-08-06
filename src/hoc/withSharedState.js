@@ -13,9 +13,12 @@ const ssNamespaces = {
     errorbar: 'errorbar',
     useraccount: 'useraccount',
     postsettings: 'postsettings',
+    postmedia: 'postmedia',
     contenttoolbar: 'contenttoolbar',
     dialogform: 'dialogform',
     width: 'width',
+    media: 'media',
+    dropzone: 'dropzone',
 };
 
 export {ssNamespaces};

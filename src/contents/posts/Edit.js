@@ -16,6 +16,7 @@ import PostSettings, {
     PostSettingsComments,
     PostSettingsMoreOptions,} from '../../components/posts/PostSettings';
 
+import PostMedia from '../../components/posts/PostMedia';
 import PostTitle from '../../components/posts/PostTitle';
 import PostContent from '../../components/posts/PostContent';
 import PostToolbar from '../../components/posts/PostToolbar';
@@ -96,6 +97,7 @@ class Edit extends React.Component {
                <PostSettingsMoreOptions edit={edit} />
             </PostSettings>
            
+            <PostMedia edit={edit} />
             <PostTitle edit={edit} />
             <PostContent edit={edit} />
 

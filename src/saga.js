@@ -136,6 +136,9 @@ function *init({httpClient, authorizer}){
             authResult,
         });
 
+console.log('-----------account----------------');
+console.log(accountResponse);
+
         account.update(accountResponse.body);
 
         let siteResponse = yield call(httpClient, {

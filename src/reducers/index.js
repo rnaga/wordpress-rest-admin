@@ -10,6 +10,7 @@ import auth from './auth';
 import admin from './admin';
 import clickaway from './clickaway';
 import errors from './errors';
+import media from './media';
 
 export default combineReducers({
     http,
@@ -21,4 +22,5 @@ export default combineReducers({
     admin,
     clickaway,
     errors,
+    media,
 });

@@ -36,6 +36,7 @@ class IconActionButton extends React.Component{
     render(){
 
         const {type: iconType = 'save', 
+               disabled = false,
                cssStyles, 
                isAsync, 
                iconStyle = {}, 
@@ -66,6 +67,7 @@ class IconActionButton extends React.Component{
           <IconButton 
             className={cssStyles.button}
 //            type={type}
+            disabled={disabled}
             style={style}
             aria-label={iconName}
             onClick={this.handleClick.bind(this)}>

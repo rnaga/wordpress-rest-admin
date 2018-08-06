@@ -1,11 +1,11 @@
 import {compose} from 'recompose';
-import List from './list';
 import withStyles from '../../hoc/withStyles';
-import withContentToolbar from '../../hoc/withContentToolbar';
+import List from './list';
+import withContentToolbar from '../withContentToolbar';
 
-const withTableList = ({namespace}) => WrappedComponent => {
+const withGridList = ({namespace}) => WrappedComponent => {
 
-    class Hoc extends List({namespace}){ //Contents{
+    class Hoc extends List({namespace}){ 
 
         render(){
             return this._render({namespace, WrappedComponent});
@@ -29,48 +29,53 @@ const withTableList = ({namespace}) => WrappedComponent => {
                 resetItems: this.resetItems.bind(component),
                 parseHttpResponse: this.parseHttpResponse.bind(component),
                 updateItems: this.updateItems.bind(component),
-                tablelistProps: this.tablelistProps.bind(component),
+                gridlistProps: this.gridlistProps.bind(component),
                 updateReferenceItems: this.updateReferenceItems.bind(component),
             });
 
             const _component = component[namespace];
 
             const {
-                _location: location, 
+                _location: location,
                 reload,
                 addNewButton,
-                resetItems} = _component; 
+                resetItems} = _component;
 
             resetItems();
 
             reload(location);
-         
+
             const {addNewButton: addNewButtonOptions} = _options;
 
             if(addNewButtonOptions)
                 addNewButton(addNewButtonOptions);
         }
 
-        tablelistProps(){
- 
+       gridlistProps(){
+
            const {_items: {items, itemsCount}, pageArgs, updatePageArgs} = this[namespace];
- 
-           return{ 
+
+           const pagenationProps = {
+               page: pageArgs.page,
+               itemsPerPage: 20,
+               onChangePage: (e,page) => updatePageArgs({page})
+           }
+
+           return{
                items,
+               pagenationProps,
                count: itemsCount,
                page: (pageArgs.page-1),
                rowsPerPage: pageArgs.per_page,
-               rowsPerPageOptions: [5,10,25,50],
+//               rowsPerPageOptions: [5,10,25,50],
                handleChangePage: (e,page) => updatePageArgs({page: (page+1)}),
-               handleChangeRowsPerPage: value => updatePageArgs({per_page: value, page: 1}),
            }
-        }
-
+       }
     }
 
     return compose(withStyles, withContentToolbar)(Hoc);
 }
 
-export default withTableList;
+export default withGridList;
 
 

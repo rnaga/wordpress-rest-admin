@@ -16,10 +16,24 @@ const types = {
     CLICKAWAY_CLEAR: 'CLICKAWAY_CLEAR',
     ERRORS_UPDATE: 'ERRORS_UPDATE',
     ERROR_ADD: 'ERROR_ADD',
+    MEDIA_UPLOAD: 'MEDIA_UPLOAD',
+    MEDIA_UPLOAD_COMPLETE: 'MEDIA_UPLOAD_COMPLETE',
 }
 
 const actions = {
  
+    mediaUpload: ({key, file, html}) => ({
+        type: types.MEDIA_UPLOAD,
+        key,
+        file,
+        html,
+    }),
+
+    mediaUploadComplete: ({key}) => ({
+        type: types.MEDIA_UPLOAD_COMPLETE,
+        key
+    }), 
+
     updateErrors: ({errors}) => ({
         type: types.ERRORS_UPDATE,
         errors,

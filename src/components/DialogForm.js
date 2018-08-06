@@ -1,11 +1,14 @@
 import React from 'react';
 import {compose} from 'recompose';
+import withMobileDialog from '@material-ui/core/withMobileDialog';
 import withStyles from '../hoc/withStyles';
 import withSharedState, {ssNamespaces} from '../hoc/withSharedState';
+import withWidth from '../hoc/withWidth';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import Form from './Form';
 import {SaveButton, CancelButton} from './ActionButton';
+import IconActionButton from './IconActionButton';
 
 class DialogForm extends React.Component{
 
@@ -56,12 +59,11 @@ class DialogForm extends React.Component{
           </Form></div>);
 
         return elem;
-        
     }
 
     render(){
 
-        const {getSharedState, cssStyles} = this.props;
+        const {getSharedState, cssStyles, width} = this.props;
         const content = this.createContent();
 
         const {open = false} = getSharedState();
@@ -69,18 +71,32 @@ class DialogForm extends React.Component{
         if(!content) 
             return null;
 
+        let classes = {};
+
+        if(width === 'lg' || width === 'xl')
+            classes = {paper: cssStyles.dialogPaperLg};
+        else if(width === 'md' || width === 'sm')
+            classes = {paper: cssStyles.dialogPaperMd};
+
         return (
         <Dialog
-          classes={{paper: cssStyles.dialogPaper}} 
+          fullScreen={width === 'xs'}
+          classes={classes} 
           open={open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title">
+          {width === 'xs' &&
+            <div>
+              <IconActionButton type='close' onClick={this.handleClose} style={{float: 'right'}} />
+            </div>}
           {content}
         </Dialog>);
     }
 } 
 
 export default compose(
+  withMobileDialog(),
+  withWidth(),
   withStyles,
   withSharedState({namespace: ssNamespaces.dialogform}),
 )(DialogForm);

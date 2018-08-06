@@ -16,6 +16,7 @@ import PostSettings, {
     PostSettingsComments,
     PostSettingsMoreOptions,} from 'wordpress-rest-admin/components/posts/PostSettings';
 
+import PostMedia from 'wordpress-rest-admin/components/posts/PostMedia';
 import PostTitle from 'wordpress-rest-admin/components/posts/PostTitle';
 import PostContent from 'wordpress-rest-admin/components/posts/PostContent';
 import PostToolbar from 'wordpress-rest-admin/components/posts/PostToolbar';
@@ -96,6 +97,7 @@ class Edit extends React.Component {
                <PostSettingsMoreOptions edit={edit} />
             </PostSettings>
            
+            <PostMedia edit={edit} />
             <PostTitle edit={edit} />
             <PostContent edit={edit} />
 

@@ -41,7 +41,7 @@ class ListItemButton extends React.Component{
                style = {},
                noPadding = false,
          } = this.props;
-    
+   
         const classes = _classes || {primary: cssStyles.listItemText};
         const Icon = getIcon({iconName: icon});
         const collapse = isSidebarCollapse();
@@ -63,7 +63,6 @@ class ListItemButton extends React.Component{
             onClick={onClick}
             style={{...style, ...{padding: noPadding ? '12px 16px' : '8px 16px', width: collapse ? 56 : 171}}} 
             classes={{root: classesListItem}} >
-    
             <ListItemIcon className={cssStyles.listItemIcon}>
                {!enableLabel && width !== 'xs' ? (
                <Tooltip
@@ -71,7 +70,6 @@ class ListItemButton extends React.Component{
                  title={label}
                  placement="right"
                  classes={{tooltip: cssStyles.drawerTooltip}}>
-        
                  <Icon style={iconStyle} />
               </Tooltip>) : (<Icon style={iconStyle} />)}
             </ListItemIcon>

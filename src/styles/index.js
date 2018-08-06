@@ -316,10 +316,14 @@ const styles = theme => {
       height: theme.spacing.unit * 4,
     },
   
-    dialogPaper: {
+    dialogPaperLg: {
         width: '50%',
     },
   
+    dialogPaperMd: {
+        width: '80%',
+    },
+
     expandCollapseEntered: {
       overflow: 'unset !important',
     },
@@ -327,6 +331,17 @@ const styles = theme => {
     expandPanelSummaryContent: {
       display: 'block !important'
     },
+
+    mediaGridListTileImgFullWidth: {
+      top: '50%',
+      width: '',
+      position: 'relative',
+    },
+  
+    mediaPageRoot: {
+        padding: '10px 10px 0 10px'
+    }
+
 }}
 
 export default styles;
