@@ -112,7 +112,7 @@ import mypage from './contents/mypage';
 ### How to import existing pages into your project 
 This is useful in case you want to modify existing pages
 ```
-yo wordpress-rest-admin --copy-from=[content]
+yo wordpress-rest-admin:contents --copy-from=[content]
 ```
 where "content" is one of the following.
 ```
