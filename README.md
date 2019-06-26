@@ -29,7 +29,7 @@ Make sure you have WP REST API and JWP plugin installed in your wordpress
 - https://v2.wp-api.org/
 - Note that WordPress (4.7 or later) has this installed by default
 
-#### JWP Authentication for WP REST API 
+#### JWT Authentication for WP REST API 
 - [Installation instructions](https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/)
 - [Tutorial](https://www.youtube.com/watch?v=Mp7T7x1oxDk)
 
