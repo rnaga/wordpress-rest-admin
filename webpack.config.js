@@ -36,14 +36,14 @@ const getNpmConfig = (varname, _default) => {
 }
 
 // glob path to set the entry point
-const entryPath = getNpmConfig('entryPath', null).split(",");
+const entryPath = getNpmConfig('entryPath', null);
 
 // Path for output files
 const outputPath = getNpmConfig('outputPath', path.resolve(__dirname, "dist"));
 
 const entries = !entryPath 
               ? {WPAdmin: "./src/WPAdmin.js"} 
-              : getEntries(entryPath); 
+              : getEntries(entryPath.split(",");
 
 module.exports = {
     entry: entries,

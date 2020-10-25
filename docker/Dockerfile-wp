@@ -1,0 +1,17 @@
+FROM wordpress
+
+WORKDIR /var/www/html
+
+RUN apt-get update
+RUN apt-get install -y vim mariadb-client wget
+
+RUN wget -O /usr/local/bin/wait-for-it https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
+RUN chmod 755 /usr/local/bin/wait-for-it
+
+RUN wget -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod 755 /usr/local/bin/wp
+
+ADD ./docker/docker-entrypoint-wp.sh /usr/local/bin/docker-entrypoint-wp.sh
+
+CMD ["bash", "/usr/local/bin/docker-entrypoint-wp.sh"]
+

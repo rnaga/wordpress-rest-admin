@@ -55,7 +55,7 @@ const auth = {
         // 3600 => 1 hour, 604800 => 1 week
         const maxAge = (!remember) ? 3600 : 604800
 
-        cookies.set('login_token', body.token, {path: '/', maxAge});
+        cookies.set('login_token', body.data.token, {path: '/', maxAge});
 
         return returnValue;
 
