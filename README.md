@@ -29,8 +29,8 @@ Make sure you have WP REST API and JWP plugin installed in your wordpress
 - https://v2.wp-api.org/
 - Note that WordPress (4.7 or later) has this installed by default
 
-#### JWP Authentication for WP REST API 
-- [Installation instructions](https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/)
+#### JWT Authentication for WP REST API 
+- [Installation instructions](https://wordpress.org/plugins/jwt-auth/#installation)
 - [Tutorial](https://www.youtube.com/watch?v=Mp7T7x1oxDk)
 
 ### git clone and npm start
@@ -41,6 +41,19 @@ npm install
 npm start
 ```
 - Visit http://localhost:3000
+
+### Quick start with docker-compose.yml
+- Use docker-compose to start wordpress-rest-admin along with wordpress and MySQL 
+```
+git clone https://github.com/rnaga/wordpress-rest-admin.git .
+docker-compose up --build
+```
+Once all containers are up, visit http://localhost:3000 and login with the following creds
+```
+Site URL: http://localhost
+Username: demo
+Password: demo
+```
 
 ### Use as a React Component
 
