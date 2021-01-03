@@ -43,7 +43,7 @@ const outputPath = getNpmConfig('outputPath', path.resolve(__dirname, "dist"));
 
 const entries = !entryPath 
               ? {WPAdmin: "./src/WPAdmin.js"} 
-              : getEntries(entryPath.split(",");
+              : getEntries(entryPath.split(","));
 
 module.exports = {
     entry: entries,
